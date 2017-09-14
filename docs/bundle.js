@@ -24024,8 +24024,6 @@ var Popover = (_temp = _class = function (_PureComponent) {
 
                 var popover = _this.popover;
 
-                console.log('orz', place, newPlace, offset, target);
-
                 if (!target) {
                     return false;
                 }
@@ -24184,21 +24182,13 @@ var Popover = (_temp = _class = function (_PureComponent) {
             var _props = this.props,
                 className = _props.className,
                 children = _props.children,
-                target = _props.target,
-                show = _props.show,
-                spacing = _props.spacing,
-                top = _props.top,
-                left = _props.left,
-                preferPlace = _props.preferPlace,
-                props = _objectWithoutProperties(_props, ['className', 'children', 'target', 'show', 'spacing', 'top', 'left', 'preferPlace']);
+                props = _objectWithoutProperties(_props, ['className', 'children']);
 
             var _state = this.state,
                 isShow = _state.isShow,
                 place = _state.place,
                 offset = _state.offset;
 
-
-            console.log(target, show, spacing, top, left, preferPlace);
 
             return _react2.default.createElement(
                 'div',
@@ -25513,4 +25503,4 @@ if(false) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?896c2f580495c68cff16
+//# sourceMappingURL=bundle.js.map?b98fc56c18adb5c44008

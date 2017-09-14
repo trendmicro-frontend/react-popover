@@ -84,8 +84,6 @@ class Popover extends PureComponent {
             } = this.props;
             const popover = this.popover;
 
-            console.log('orz', place, newPlace, offset, target);
-
             if (!target) {
                 return false;
             }
@@ -213,24 +211,9 @@ class Popover extends PureComponent {
         const {
             className,
             children,
-            target,
-            show,
-            spacing,
-            top,
-            left,
-            preferPlace,
             ...props
         } = this.props;
         const { isShow, place, offset } = this.state;
-
-        console.log(
-            target,
-            show,
-            spacing,
-            top,
-            left,
-            preferPlace
-        );
 
         return (
             <div
