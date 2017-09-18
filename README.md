@@ -49,10 +49,10 @@ Demo: https://trendmicro-frontend.github.io/react-popover
     <Popover.Footer>Footer</Popover.Footer>
 </Popover>
 
-// Set preferPlace
+// Set prefer place
 <Popover
     show={true}
-    preferPlace="top-left"
+    placement="top-left"
 >
     <Popover.Body>
         <span>Popover Top-left</span>
@@ -62,8 +62,8 @@ Demo: https://trendmicro-frontend.github.io/react-popover
 // Set location
 <Popover
     show={true}
-    top={50}
-    left={50}
+    positionTop={50}
+    positionLeft={50}
 >
     <Popover.Body>
         <span>Popover Top</span>
@@ -103,7 +103,7 @@ Demo: https://trendmicro-frontend.github.io/react-popover
             <td>Specify whether to show the popover.</td>
         </tr>
         <tr>
-            <td>preferPlace</td>
+            <td>placement</td>
             <td>String</td>
             <td>'top'</td>
             <td>
@@ -137,16 +137,16 @@ Demo: https://trendmicro-frontend.github.io/react-popover
             <td>The spacing (px) between target and arrow</td>
         </tr>
         <tr>
-            <td>top</td>
+            <td>positionTop</td>
             <td>Number</td>
             <td>0</td>
-            <td>Specify the top location of popover. It is for specify the initial location only, if propertie target is given.</td>
+            <td>The "top" position value (px) for the Popover. If propertie target is given, it will be the initial value only.</td>
         </tr>
         <tr>
-            <td>left</td>
+            <td>positionLeft</td>
             <td>Number</td>
             <td>0</td>
-            <td>Specify the left location of popover. It is for specify the initial location only, if propertie target is given.</td>
+            <td>The "left" position value (px) for the Popover. If propertie target is given, it will be the initial value only.</td>
         </tr>
   </tbody>
 </table>

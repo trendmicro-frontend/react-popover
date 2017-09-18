@@ -14,9 +14,9 @@ class Popover extends PureComponent {
         // Specify whether to show the popover.
         show: PropTypes.bool,
         spacing: PropTypes.number, // The spacing between target and arrow
-        top: PropTypes.number,
-        left: PropTypes.number,
-        preferPlace: PropTypes.oneOf([
+        positionTop: PropTypes.number,
+        positionLeft: PropTypes.number,
+        placement: PropTypes.oneOf([
             'top',
             'top-left',
             'top-right',
@@ -35,9 +35,9 @@ class Popover extends PureComponent {
         target: null,
         show: false,
         spacing: 0, // in px
-        top: 0,
-        left: 0,
-        preferPlace: 'top'
+        positionTop: 0,
+        positionLeft: 0,
+        placement: 'top'
     };
 
     constructor(props) {
@@ -46,10 +46,10 @@ class Popover extends PureComponent {
         this.state = {
             target: props.target,
             isShow: !!props.show,
-            place: props.preferPlace,
+            place: props.placement,
             offset: {
-                top: props.top,
-                left: props.left
+                top: props.positionTop,
+                left: props.positionLeft
             }
         };
     }
@@ -79,8 +79,10 @@ class Popover extends PureComponent {
             const { place, offset } = this.state;
             const {
                 target,
-                preferPlace: newPlace,
-                spacing
+                placement: newPlace,
+                spacing,
+                positionTop,
+                positionLeft
             } = this.props;
             const popover = this.popover;
 
@@ -89,8 +91,8 @@ class Popover extends PureComponent {
             }
 
             let newOffset = {
-                top: 0,
-                left: 0
+                top: positionTop,
+                left: positionLeft
             };
 
             if (newPlace === 'top') {

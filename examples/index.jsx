@@ -91,7 +91,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="top-left"
+                                            placement="top-left"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -106,7 +106,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="top-right"
+                                            placement="top-right"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -122,7 +122,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="right"
+                                            placement="right"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -137,7 +137,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="right-top"
+                                            placement="right-top"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -152,7 +152,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="right-bottom"
+                                            placement="right-bottom"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -168,7 +168,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="bottom"
+                                            placement="bottom"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -183,7 +183,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="bottom-left"
+                                            placement="bottom-left"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -198,7 +198,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="bottom-right"
+                                            placement="bottom-right"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -214,7 +214,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="left"
+                                            placement="left"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -229,7 +229,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="left-top"
+                                            placement="left-top"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -244,7 +244,7 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            preferPlace="left-bottom"
+                                            placement="left-bottom"
                                             className={styles['popover-example']}
                                         >
                                             <Popover.Body>
@@ -289,7 +289,7 @@ class App extends React.Component {
                         <div className="col-md-6">
                             <Section className="row-md-6">
                                 <h2>Popovers with Control Elements</h2>
-                                <p>Popover can contain other control elements such as links and buttons.</p>
+                                <p>Popover can contain other control elements such as links and buttons. Click icon below to get an example.</p>
                                 <div>
                                     { /* <!-- popover bottom --> */ }
                                     <form>
@@ -304,7 +304,7 @@ class App extends React.Component {
                                             onClick={() => {
                                                 this.actions.togglePopover('popover-example-ctrl', {
                                                     target: this.popoverTarget,
-                                                    preferPlace: 'bottom-right'
+                                                    placement: 'bottom-right'
                                                 });
                                             }}
                                         />
@@ -312,7 +312,7 @@ class App extends React.Component {
                                     {this.state.popover.name && this.state.popover.name === 'popover-example-ctrl' &&
                                     <Popover
                                         target={this.state.popover.params.target}
-                                        preferPlace={this.state.popover.params.preferPlace}
+                                        placement={this.state.popover.params.placement}
                                         show={this.state.popover.params.show}
                                         className={styles['popover-example']}
                                     >
@@ -321,11 +321,11 @@ class App extends React.Component {
                                             <div>
                                                 <div className="form-group">
                                                     <label htmlFor="">IP address:</label>
-                                                    <input className="form-control" type="text" />
+                                                    <input className="form-control" type="text" defaultValue="" />
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="">Host name:</label>
-                                                    <input className="form-control" type="text" />
+                                                    <input className="form-control" type="text" defaultValue="" />
                                                 </div>
                                             </div>
                                         </Popover.Body>

@@ -24019,8 +24019,10 @@ var Popover = (_temp = _class = function (_PureComponent) {
                     offset = _this$state.offset;
                 var _this$props = _this.props,
                     target = _this$props.target,
-                    newPlace = _this$props.preferPlace,
-                    spacing = _this$props.spacing;
+                    newPlace = _this$props.placement,
+                    spacing = _this$props.spacing,
+                    positionTop = _this$props.positionTop,
+                    positionLeft = _this$props.positionLeft;
 
                 var popover = _this.popover;
 
@@ -24029,8 +24031,8 @@ var Popover = (_temp = _class = function (_PureComponent) {
                 }
 
                 var newOffset = {
-                    top: 0,
-                    left: 0
+                    top: positionTop,
+                    left: positionLeft
                 };
 
                 if (newPlace === 'top') {
@@ -24150,10 +24152,10 @@ var Popover = (_temp = _class = function (_PureComponent) {
         _this.state = {
             target: props.target,
             isShow: !!props.show,
-            place: props.preferPlace,
+            place: props.placement,
             offset: {
-                top: props.top,
-                left: props.left
+                top: props.positionTop,
+                left: props.positionLeft
             }
         };
         return _this;
@@ -24214,16 +24216,16 @@ var Popover = (_temp = _class = function (_PureComponent) {
     // Specify whether to show the popover.
     show: _propTypes2.default.bool,
     spacing: _propTypes2.default.number, // The spacing between target and arrow
-    top: _propTypes2.default.number,
-    left: _propTypes2.default.number,
-    preferPlace: _propTypes2.default.oneOf(['top', 'top-left', 'top-right', 'right', 'right-top', 'right-bottom', 'bottom', 'bottom-left', 'bottom-right', 'left', 'left-top', 'left-bottom'])
+    positionTop: _propTypes2.default.number,
+    positionLeft: _propTypes2.default.number,
+    placement: _propTypes2.default.oneOf(['top', 'top-left', 'top-right', 'right', 'right-top', 'right-bottom', 'bottom', 'bottom-left', 'bottom-right', 'left', 'left-top', 'left-bottom'])
 }, _class.defaultProps = {
     target: null,
     show: false,
     spacing: 0, // in px
-    top: 0,
-    left: 0,
-    preferPlace: 'top'
+    positionTop: 0,
+    positionLeft: 0,
+    placement: 'top'
 }, _temp);
 exports.default = Popover;
 
@@ -25010,7 +25012,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'top-left',
+                                                placement: 'top-left',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25037,7 +25039,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'top-right',
+                                                placement: 'top-right',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25064,7 +25066,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'right',
+                                                placement: 'right',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25091,7 +25093,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'right-top',
+                                                placement: 'right-top',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25118,7 +25120,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'right-bottom',
+                                                placement: 'right-bottom',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25145,7 +25147,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'bottom',
+                                                placement: 'bottom',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25172,7 +25174,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'bottom-left',
+                                                placement: 'bottom-left',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25199,7 +25201,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'bottom-right',
+                                                placement: 'bottom-right',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25226,7 +25228,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'left',
+                                                placement: 'left',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25253,7 +25255,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'left-top',
+                                                placement: 'left-top',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25280,7 +25282,7 @@ var App = function (_React$Component) {
                                             _src2.default,
                                             {
                                                 show: true,
-                                                preferPlace: 'left-bottom',
+                                                placement: 'left-bottom',
                                                 className: _index2.default['popover-example']
                                             },
                                             _react2.default.createElement(
@@ -25382,7 +25384,7 @@ var App = function (_React$Component) {
                                 _react2.default.createElement(
                                     'p',
                                     null,
-                                    'Popover can contain other control elements such as links and buttons.'
+                                    'Popover can contain other control elements such as links and buttons. Click icon below to get an example.'
                                 ),
                                 _react2.default.createElement(
                                     'div',
@@ -25398,7 +25400,7 @@ var App = function (_React$Component) {
                                             onClick: function onClick() {
                                                 _this2.actions.togglePopover('popover-example-ctrl', {
                                                     target: _this2.popoverTarget,
-                                                    preferPlace: 'bottom-right'
+                                                    placement: 'bottom-right'
                                                 });
                                             }
                                         })
@@ -25407,7 +25409,7 @@ var App = function (_React$Component) {
                                         _src2.default,
                                         {
                                             target: this.state.popover.params.target,
-                                            preferPlace: this.state.popover.params.preferPlace,
+                                            placement: this.state.popover.params.placement,
                                             show: this.state.popover.params.show,
                                             className: _index2.default['popover-example']
                                         },
@@ -25430,7 +25432,7 @@ var App = function (_React$Component) {
                                                         { htmlFor: '' },
                                                         'IP address:'
                                                     ),
-                                                    _react2.default.createElement('input', { className: 'form-control', type: 'text' })
+                                                    _react2.default.createElement('input', { className: 'form-control', type: 'text', defaultValue: '' })
                                                 ),
                                                 _react2.default.createElement(
                                                     'div',
@@ -25440,7 +25442,7 @@ var App = function (_React$Component) {
                                                         { htmlFor: '' },
                                                         'Host name:'
                                                     ),
-                                                    _react2.default.createElement('input', { className: 'form-control', type: 'text' })
+                                                    _react2.default.createElement('input', { className: 'form-control', type: 'text', defaultValue: '' })
                                                 )
                                             )
                                         ),
@@ -25503,4 +25505,4 @@ if(false) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?b98fc56c18adb5c44008
+//# sourceMappingURL=bundle.js.map?457185e2406eec32939d
