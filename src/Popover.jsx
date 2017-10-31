@@ -217,6 +217,14 @@ class Popover extends PureComponent {
         } = this.props;
         const { isShow, place, offset } = this.state;
 
+        // Remove props do not need to set into div
+        delete props.target;
+        delete props.show;
+        delete props.spacing;
+        delete props.positionTop;
+        delete props.positionLeft;
+        delete props.placement;
+
         return (
             <div
                 {...props}
