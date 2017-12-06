@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import PopoverArrow from './PopoverArrow';
-// import PopoverHeader from './PopoverHeader';
 import styles from './index.styl';
 
 const arrowWidth = 18;
