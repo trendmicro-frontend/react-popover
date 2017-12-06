@@ -20220,8 +20220,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class, _temp;
-// import PopoverHeader from './PopoverHeader';
-
 
 var _propTypes = __webpack_require__("../node_modules/prop-types/index.js");
 
@@ -20798,10 +20796,7 @@ var _PopoverFooter2 = _interopRequireDefault(_PopoverFooter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Popover.Arrow = PopoverArrow;
 _Popover2.default.Header = _PopoverHeader2.default;
-// import PopoverArrow from './PopoverArrow';
-
 _Popover2.default.Body = _PopoverBody2.default;
 _Popover2.default.Footer = _PopoverFooter2.default;
 
@@ -21776,4 +21771,4 @@ if(false) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?1d824d1848e2d9c97aec
+//# sourceMappingURL=bundle.js.map?f71478fd3266b6d410eb
