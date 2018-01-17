@@ -1,249 +1,124 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import Trigger from 'rc-trigger';
 import PopoverArrow from './PopoverArrow';
+import PopoverHeader from './PopoverHeader';
+import PopoverBody from './PopoverBody';
+import PopoverFooter from './PopoverFooter';
+import { placements } from './placements';
 import styles from './index.styl';
-
-const arrowWidth = 18;
-const arrowShift = 16;
 
 class Popover extends PureComponent {
     static propTypes = {
-        target: PropTypes.object,
-        // Specify whether to show the popover.
-        show: PropTypes.bool,
-        spacing: PropTypes.number, // The spacing between target and arrow
-        positionTop: PropTypes.number,
-        positionLeft: PropTypes.number,
         placement: PropTypes.oneOf([
             'top',
-            'top-left',
-            'top-right',
+            'topLeft',
+            'topRight',
             'right',
-            'right-top',
-            'right-bottom',
+            'rightTop',
+            'rightBottom',
             'bottom',
-            'bottom-left',
-            'bottom-right',
+            'bottomLeft',
+            'bottomRight',
             'left',
-            'left-top',
-            'left-bottom'
+            'leftTop',
+            'leftBottom'
+        ]),
+        enterDelay: PropTypes.number, // The delay length (in ms) before popover appear.
+        leaveDelay: PropTypes.number, // The delay length (in ms) between the mouse leaving the target and popover disappearance.
+        // contents
+        popoverClassName: PropTypes.string, // The className apply to popover itself. You can use it to override style portal if need
+        popoverStyle: PropTypes.object, // The style apply to popover itself. You can use it to override style portal if need
+        popoverHeader: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.func
+        ]),
+        popoverBody: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.func
+        ]).isRequired,
+        popoverFooter: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.func
         ])
     };
     static defaultProps = {
-        target: null,
-        show: false,
-        spacing: 0, // in px
-        positionTop: 0,
-        positionLeft: 0,
-        placement: 'top'
+        placement: 'top',
+        enterDelay: 0, // milliseconds
+        leaveDelay: 100 // milliseconds
     };
 
-    constructor(props) {
-        super(props);
+    prefixCls = 'tm-popover'; // Reset prefix class name
 
-        this.state = {
-            target: props.target,
-            isShow: !!props.show,
-            place: props.placement,
-            offset: {
-                top: props.positionTop,
-                left: props.positionLeft
-            }
-        };
+    getPopupElement = () => {
+        const { popoverHeader, popoverBody, popoverFooter } = this.props;
+        return ([
+            <PopoverArrow prefixCls={this.prefixCls} key="arrow" />,
+            <PopoverHeader prefixCls={this.prefixCls} content={popoverHeader} key="header" />,
+            <PopoverBody prefixCls={this.prefixCls} content={popoverBody} key="content" />,
+            <PopoverFooter prefixCls={this.prefixCls} content={popoverFooter} key="footer" />
+        ]);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.actions.toggle(nextProps.show);
+    getPopupDomNode() {
+        return this.trigger.getPopupDomNode();
     }
 
-    componentDidMount() {
-        this.actions.adjustPlace();
+    saveTrigger = (node) => {
+        this.trigger = node;
     }
-
-    componentDidUpdate(prevProps, prevState) {
-        this.actions.adjustPlace();
-    }
-
-    actions = {
-        toggle: (toState = null) => {
-            this.setState((prevState, props) => {
-                return {
-                    ...prevState,
-                    isShow: (toState === null) ? !prevState.isShow : !!toState
-                };
-            });
-        },
-        adjustPlace: () => {
-            const { place, offset } = this.state;
-            const {
-                target,
-                placement: newPlace,
-                spacing,
-                positionTop,
-                positionLeft
-            } = this.props;
-            const popover = this.popover;
-
-            if (!target) {
-                return false;
-            }
-
-            let newOffset = {
-                top: positionTop,
-                left: positionLeft
-            };
-
-            if (newPlace === 'top') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - (popover.offsetWidth / 2))
-                };
-            }
-
-            if (newPlace === 'top-left') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - popover.offsetWidth + arrowShift + (arrowWidth / 2))
-                };
-            }
-
-            if (newPlace === 'top-right') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - arrowShift - (arrowWidth / 2))
-                };
-            }
-
-            if (newPlace === 'right') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - (popover.offsetHeight / 2)),
-                    left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                };
-            }
-
-            if (newPlace === 'right-top') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - popover.offsetHeight + arrowShift + (arrowWidth / 2)),
-                    left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                };
-            }
-
-            if (newPlace === 'right-bottom') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - arrowShift - (arrowWidth / 2)),
-                    left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                };
-            }
-
-            if (newPlace === 'bottom') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - (popover.offsetWidth / 2))
-                };
-            }
-
-            if (newPlace === 'bottom-left') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - popover.offsetWidth + arrowShift + (arrowWidth / 2))
-                };
-            }
-
-            if (newPlace === 'bottom-right') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - arrowShift - (arrowWidth / 2))
-                };
-            }
-
-            if (newPlace === 'left') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - (popover.offsetHeight / 2)),
-                    left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                };
-            }
-
-            if (newPlace === 'left-top') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - popover.offsetHeight + arrowShift + (arrowWidth / 2)),
-                    left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                };
-            }
-
-            if (newPlace === 'left-bottom') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - arrowShift - (arrowWidth / 2)),
-                    left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                };
-            }
-
-            // this.actions.isElementInView(popover, true)
-            if (place !== newPlace || offset.top !== newOffset.top || offset.left !== newOffset.left) {
-                this.setState((prevState, props) => {
-                    return {
-                        ...prevState,
-                        place: newPlace,
-                        offset: newOffset
-                    };
-                });
-
-                return true;
-            }
-
-            return false;
-        },
-        // https://stackoverflow.com/questions/487073/check-if-element-is-visible-after-scrolling
-        isElementInView: (element, fullyInView) => {
-            const pageTop = document.body.scrollTop;
-            const pageBottom = pageTop + document.body.offsetHeight;
-            const elementTop = element.offsetTop;
-            const elementBottom = elementTop + element.offsetHeight;
-
-            if (fullyInView === true) {
-                return ((pageTop < elementTop) && (pageBottom > elementBottom));
-            } else {
-                return ((elementTop <= pageBottom) && (elementBottom >= pageTop));
-            }
-        }
-    };
 
     render() {
         const {
-            className,
             children,
+            placement,
+            enterDelay,
+            leaveDelay,
+            popoverClassName,
+            popoverStyle,
+            show,
             ...props
         } = this.props;
-        const { isShow, place, offset } = this.state;
 
         // Remove props do not need to set into div
-        delete props.target;
-        delete props.show;
-        delete props.spacing;
-        delete props.positionTop;
-        delete props.positionLeft;
-        delete props.placement;
+        delete props.content;
+        if (typeof show !== 'undefined') {
+            props.popupVisible = show;
+        }
+
+        const triggerActions = ['click'];
+        const mouseEnterDelay = enterDelay / 1000; // To seconds
+        const mouseLeaveDelay = leaveDelay / 1000; // To seconds
+
+        // adjust placements
+        const placementKey = placements[placement] ? placement : 'top';
+        const placementSettings = placements[placementKey];
+        const temp = { [placementKey]: placementSettings };
+        const copy = Object.assign({}, placements);
+        delete copy[placementKey];
+        const adjustPlacements = Object.assign(temp, copy);
 
         return (
-            <div
-                {...props}
-                ref={node => {
-                    this.popover = node;
-                }}
-                style={{
-                    top: offset.top,
-                    left: offset.left
-                }}
-                className={classNames(
-                    className,
+            <Trigger
+                ref={this.saveTrigger}
+                prefixCls={this.prefixCls}
+                action={triggerActions}
+                builtinPlacements={adjustPlacements}
+                // popupVisible={show}
+                popupPlacement={placement}
+                popup={this.getPopupElement}
+                popupClassName={classNames(
                     styles.popover,
-                    { [styles.show]: isShow },
-                    styles[place] || ''
+                    popoverClassName
                 )}
+                popupStyle={popoverStyle}
+                mouseEnterDelay={mouseEnterDelay}
+                mouseLeaveDelay={mouseLeaveDelay}
+                {...props}
             >
-                <PopoverArrow className={styles[place]} />
                 {children}
-            </div>
+            </Trigger>
         );
     }
 }

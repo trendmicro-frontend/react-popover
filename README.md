@@ -27,57 +27,35 @@ Demo: https://trendmicro-frontend.github.io/react-popover
 
 ```js
 // Basic
-<Popover show={true}>
-    <Popover.Body>
-        <span>Popover Top</span>
-    </Popover.Body>
+<Popover
+    popoverBody={<span>Popover Top</span>}
+>
+    <i className="fa fa-info-circle" />
 </Popover>
 
 // With Header
-<Popover show={true}>
-    <Popover.Header>Title</Popover.Header>
-    <Popover.Body>
-        <span>Popover Top</span>
-    </Popover.Body>
+<Popover
+	popoverHeader={<span>File Path (3)</span>}
+    popoverBody={<span>Popover Top</span>}
+>
+    <i className="fa fa-info-circle" />
 </Popover>
 
 // With footer
-<Popover show={true}>
-    <Popover.Body>
-        <span>Popover Top</span>
-    </Popover.Body>
-    <Popover.Footer>Footer</Popover.Footer>
+<Popover
+	popoverHeader={<span>File Path (3)</span>}
+    popoverBody={<span>Popover Top</span>}
+    popoverFooter={<span>Footer</span>}
+>
+    <i className="fa fa-info-circle" />
 </Popover>
 
 // Set prefer place
 <Popover
-    show={true}
-    placement="top-left"
+	placement="topLeft"
+    popoverBody={<span>Popover Top</span>}
 >
-    <Popover.Body>
-        <span>Popover Top-left</span>
-    </Popover.Body>
-</Popover>
-
-// Set location
-<Popover
-    show={true}
-    positionTop={50}
-    positionLeft={50}
->
-    <Popover.Body>
-        <span>Popover Top</span>
-    </Popover.Body>
-</Popover>
-
-// Set target
-<Popover
-    show={true}
-    target={document.querySelector(".example-target")}
->
-    <Popover.Body>
-        <span>Popover Top</span>
-    </Popover.Body>
+    <i className="fa fa-info-circle" />
 </Popover>
 ```
 
@@ -86,70 +64,16 @@ Demo: https://trendmicro-frontend.github.io/react-popover
 
 ### Properties
 
-<table>
-    <thead>
-        <tr>
-            <th align="left">Name</th>
-            <th align="left">Type</th>
-            <th align="left">Default</th>
-            <th align="left">Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>show</td>
-            <td>Boolean</td>
-            <td>false</td>
-            <td>Specify whether to show the popover.</td>
-        </tr>
-        <tr>
-            <td>placement</td>
-            <td>String</td>
-            <td>'top'</td>
-            <td>
-                One of
-                <ul>
-                    <li>'top'</li>
-                    <li>'top-left'</li>
-                    <li>'top-right'</li>
-                    <li>'right'</li>
-                    <li>'right-top'</li>
-                    <li>'right-bottom'</li>
-                    <li>'bottom'</li>
-                    <li>'bottom-left'</li>
-                    <li>'bottom-right'</li>
-                    <li>'left'</li>
-                    <li>'left-top'</li>
-                    <li>'left-bottom'</li>
-                </ul>
-            </td>
-        </tr>
-        <tr>
-            <td>target</td>
-            <td>Object</td>
-            <td>null</td>
-            <td>Target element to aligned</td>
-        </tr>
-        <tr>
-            <td>spacing</td>
-            <td>Number</td>
-            <td>0</td>
-            <td>The spacing (px) between target and arrow</td>
-        </tr>
-        <tr>
-            <td>positionTop</td>
-            <td>Number</td>
-            <td>0</td>
-            <td>The "top" position value (px) for the Popover. If propertie target is given, it will be the initial value only.</td>
-        </tr>
-        <tr>
-            <td>positionLeft</td>
-            <td>Number</td>
-            <td>0</td>
-            <td>The "left" position value (px) for the Popover. If propertie target is given, it will be the initial value only.</td>
-        </tr>
-  </tbody>
-</table>
+Name | Type | Default | Description 
+:--- | :--- | :------ | :----------
+placement | string | 'top' | One of: 'top', 'topLeft', 'topRight', 'right', 'rightTop', 'rightBottom', 'bottom', 'bottomLeft', 'bottomRight', 'left', 'leftTop', 'leftBottom'. <br />Will display at placement if possible, otherwise adjust it's location automatically. 
+enterDelay | number | 0 | The delay length (in ms) before the popover appears.
+leaveDelay | number | 100 | The delay length (in ms) before the popover disappears.
+popoverClassName | string |  | The className apply to popover itself. You can use it to override style if need.
+popoverStyle | object |  | The style apply to popover itself. You can use it to override style if need.
+popoverBody | node or function |  | The popover body. Required.
+popoverHeader | node or function |  | The popover header content. Optional.
+popoverFooter | node or function |  | The popover footer content. Optional
 
 ## License
 

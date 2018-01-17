@@ -1,4 +1,4 @@
-/*! react-popover v0.2.3 | (c) 2017 Trend Micro Inc. | MIT | https://github.com/trendmicro-frontend/react-popover */
+/*! react-popover v0.2.3 | (c) 2018 Trend Micro Inc. | MIT | https://github.com/trendmicro-frontend/react-popover */
 .popover---popover---27gEa {
   position: absolute;
   top: 0;
@@ -175,21 +175,147 @@
 .popover---popover---27gEa.popover---bottom-left---2NYRF > .popover---arrow---32gZu {
   right: 16px;
 }
+/*
+.popover {
+    reset-context();
+
+    // display: inline-block;
+    
+    &.show {
+        display: block;
+    }
+}
+*/
+/**
+ * override style portal for integrated with rc-trigger
+ */
 .popover---popover---27gEa {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  line-height: 20px;
-}
-.popover---popover---27gEa *,
-.popover---popover---27gEa *:before,
-.popover---popover---27gEa *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit;
-}
-.popover---popover---27gEa.popover---show---1vZOn {
   display: block;
+}
+.tm-popover-hidden.popover---popover---27gEa {
+  display: none;
+}
+.popover---popover---27gEa .popover---arrow---32gZu,
+.popover---popover---27gEa .popover---arrow---32gZu:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+.popover---popover---27gEa .popover---arrow---32gZu {
+  border-width: 9px;
+}
+.popover---popover---27gEa .popover---arrow---32gZu:after {
+  border-width: 8px;
+  content: " ";
+}
+.tm-popover-placement-top.popover---popover---27gEa,
+.tm-popover-placement-topRight.popover---popover---27gEa,
+.tm-popover-placement-topLeft.popover---popover---27gEa {
+  margin-top: -11px;
+}
+.tm-popover-placement-top.popover---popover---27gEa .popover---arrow---32gZu,
+.tm-popover-placement-topRight.popover---popover---27gEa .popover---arrow---32gZu,
+.tm-popover-placement-topLeft.popover---popover---27gEa .popover---arrow---32gZu {
+  border-bottom-width: 0;
+  border-top-color: #ccc;
+  bottom: -9px;
+}
+.tm-popover-placement-top.popover---popover---27gEa .popover---arrow---32gZu:after,
+.tm-popover-placement-topRight.popover---popover---27gEa .popover---arrow---32gZu:after,
+.tm-popover-placement-topLeft.popover---popover---27gEa .popover---arrow---32gZu:after {
+  bottom: 1px;
+  margin-left: -8px;
+  border-bottom-width: 0;
+  border-top-color: #fff;
+}
+.tm-popover-placement-right.popover---popover---27gEa,
+.tm-popover-placement-rightTop.popover---popover---27gEa,
+.tm-popover-placement-rightBottom.popover---popover---27gEa {
+  margin-left: 11px;
+}
+.tm-popover-placement-right.popover---popover---27gEa .popover---arrow---32gZu,
+.tm-popover-placement-rightTop.popover---popover---27gEa .popover---arrow---32gZu,
+.tm-popover-placement-rightBottom.popover---popover---27gEa .popover---arrow---32gZu {
+  left: -9px;
+  border-left-width: 0;
+  border-right-color: #ccc;
+}
+.tm-popover-placement-right.popover---popover---27gEa .popover---arrow---32gZu:after,
+.tm-popover-placement-rightTop.popover---popover---27gEa .popover---arrow---32gZu:after,
+.tm-popover-placement-rightBottom.popover---popover---27gEa .popover---arrow---32gZu:after {
+  left: 1px;
+  bottom: -8px;
+  border-left-width: 0;
+  border-right-color: #fff;
+}
+.tm-popover-placement-bottom.popover---popover---27gEa,
+.tm-popover-placement-bottomRight.popover---popover---27gEa,
+.tm-popover-placement-bottomLeft.popover---popover---27gEa {
+  margin-top: 11px;
+}
+.tm-popover-placement-bottom.popover---popover---27gEa .popover---arrow---32gZu,
+.tm-popover-placement-bottomRight.popover---popover---27gEa .popover---arrow---32gZu,
+.tm-popover-placement-bottomLeft.popover---popover---27gEa .popover---arrow---32gZu {
+  border-top-width: 0;
+  border-bottom-color: #ccc;
+  top: -9px;
+}
+.tm-popover-placement-bottom.popover---popover---27gEa .popover---arrow---32gZu:after,
+.tm-popover-placement-bottomRight.popover---popover---27gEa .popover---arrow---32gZu:after,
+.tm-popover-placement-bottomLeft.popover---popover---27gEa .popover---arrow---32gZu:after {
+  top: 1px;
+  margin-left: -8px;
+  border-top-width: 0;
+  border-bottom-color: #fff;
+}
+.tm-popover-placement-left.popover---popover---27gEa,
+.tm-popover-placement-leftTop.popover---popover---27gEa,
+.tm-popover-placement-leftBottom.popover---popover---27gEa {
+  margin-left: -11px;
+}
+.tm-popover-placement-left.popover---popover---27gEa .popover---arrow---32gZu,
+.tm-popover-placement-leftTop.popover---popover---27gEa .popover---arrow---32gZu,
+.tm-popover-placement-leftBottom.popover---popover---27gEa .popover---arrow---32gZu {
+  right: -9px;
+  border-right-width: 0;
+  border-left-color: #ccc;
+}
+.tm-popover-placement-left.popover---popover---27gEa .popover---arrow---32gZu:after,
+.tm-popover-placement-leftTop.popover---popover---27gEa .popover---arrow---32gZu:after,
+.tm-popover-placement-leftBottom.popover---popover---27gEa .popover---arrow---32gZu:after {
+  right: 1px;
+  border-right-width: 0;
+  border-left-color: #fff;
+  bottom: -8px;
+}
+.tm-popover-placement-top .popover---arrow---32gZu,
+.tm-popover-placement-bottom .popover---arrow---32gZu {
+  left: 50%;
+  margin-left: -9px;
+}
+.tm-popover-placement-right .popover---arrow---32gZu,
+.tm-popover-placement-left .popover---arrow---32gZu {
+  top: 50%;
+  margin-top: -9px;
+}
+.tm-popover-placement-rightBottom .popover---arrow---32gZu,
+.tm-popover-placement-leftBottom .popover---arrow---32gZu {
+  top: 16px;
+}
+.tm-popover-placement-rightTop .popover---arrow---32gZu,
+.tm-popover-placement-leftTop .popover---arrow---32gZu {
+  bottom: 16px;
+}
+.tm-popover-placement-topRight .popover---arrow---32gZu,
+.tm-popover-placement-bottomRight .popover---arrow---32gZu {
+  left: 16px;
+}
+.tm-popover-placement-topLeft .popover---arrow---32gZu,
+.tm-popover-placement-bottomLeft .popover---arrow---32gZu {
+  right: 16px;
 }
 
 /*# sourceMappingURL=react-popover.css.map*/

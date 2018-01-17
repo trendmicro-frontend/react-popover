@@ -1,24 +1,37 @@
-import classNames from 'classnames';
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import styles from './index.styl';
 
 class PopoverBody extends PureComponent {
+    static propTypes = {
+        prefixCls: PropTypes.string,
+        className: PropTypes.string,
+        content: PropTypes.oneOfType([
+            PropTypes.node,
+            PropTypes.func
+        ]).isRequired
+    };
+
     render() {
         const {
-            style = {},
+            prefixCls,
             className,
+            content,
             ...props
         } = this.props;
 
         return (
             <div
                 {...props}
-                style={style}
                 className={classNames(
+                    `${prefixCls}-arrow`,
                     className,
                     styles['popover-content']
                 )}
-            />
+            >
+                {typeof content === 'function' ? content() : content}
+            </div>
         );
     }
 }

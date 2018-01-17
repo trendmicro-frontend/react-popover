@@ -1,11 +1,17 @@
-import classNames from 'classnames';
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import styles from './index.styl';
 
 class PopoverArrow extends PureComponent {
+    static propTypes = {
+        prefixCls: PropTypes.string,
+        className: PropTypes.string
+    };
+
     render() {
         const {
-            style = {},
+            prefixCls,
             className,
             ...props
         } = this.props;
@@ -13,8 +19,8 @@ class PopoverArrow extends PureComponent {
         return (
             <div
                 {...props}
-                style={style}
                 className={classNames(
+                    `${prefixCls}-arrow`,
                     className,
                     styles.arrow
                 )}

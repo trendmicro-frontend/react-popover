@@ -1,3 +1,4 @@
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
 import 'trendmicro-ui/dist/css/trendmicro-ui.css';
 import '@trendmicro/react-buttons/dist/react-buttons.css';
 import { Button } from '@trendmicro/react-buttons';
@@ -63,7 +64,7 @@ class App extends React.Component {
                 <div className="container-fluid" style={{ padding: '20px 20px 0' }}>
                     <div className="row">
                         <div className="col-md-13">
-                            <Section className="row-md-13">
+                            <Section className="row-md-16">
                                 <h2>Popovers</h2>
                                 <p>Popovers display additional information or functionality related to an object without leaving the page.</p>
                                 <ul className="description">
@@ -77,44 +78,44 @@ class App extends React.Component {
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Top</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', bottom: 10, right: '50%' }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            placement="top-left"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            placement="topLeft"
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Top-left</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', bottom: 10, right: 45 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            placement="top-right"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            placement="topRight"
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Top-right</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', bottom: 10, left: 45 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
@@ -123,44 +124,44 @@ class App extends React.Component {
                                         <Popover
                                             show={true}
                                             placement="right"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Right</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', bottom: '50%', left: 10 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            placement="right-top"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            placement="rightTop"
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Right-top</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', bottom: 45, left: 10 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            placement="right-bottom"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            placement="rightBottom"
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Right-bottom</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', top: 45, left: 10 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
@@ -169,44 +170,44 @@ class App extends React.Component {
                                         <Popover
                                             show={true}
                                             placement="bottom"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Bottom</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', top: 10, right: '50%' }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            placement="bottom-left"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            placement="bottomLeft"
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Bottom-left</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', top: 10, right: 45 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            placement="bottom-right"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            placement="bottomRight"
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover Bottom-right</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', top: 10, left: 45 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
@@ -215,44 +216,44 @@ class App extends React.Component {
                                         <Popover
                                             show={true}
                                             placement="left"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover left</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', top: '50%', right: 10 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            placement="left-top"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            placement="leftTop"
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover left-top</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', bottom: 35, right: 10 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
 
                                     <div className={styles['popover-example-rwd']}>
                                         <Popover
                                             show={true}
-                                            placement="left-bottom"
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Body>
+                                            placement="leftBottom"
+                                            popoverBody={
                                                 <span>
                                                     <span>Popover left-bottom</span><br />
                                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Duis mollis, est non commod luctus, nisi erat porttitor ligula, eget lacinia.
                                                 </span>
-                                            </Popover.Body>
+                                            }
+                                        >
+                                            <span style={{ position: 'absolute', top: 45, right: 10 }}><i className="fa fa-info-circle" /></span>
                                         </Popover>
                                     </div>
                                 </div>
@@ -264,25 +265,21 @@ class App extends React.Component {
                             <Section className="row-md-6">
                                 <h2>Popovers with Headers</h2>
                                 <p>A popover can contain a header.</p>
-                                <div>
-                                    { /* <!-- popover top --> */ }
-                                    <div className={styles['popover-example-rwd']}>
-                                        <Popover
-                                            show={true}
-                                            className={styles['popover-example']}
-                                        >
-                                            <Popover.Header>
-                                                File Path (3)
-                                            </Popover.Header>
-                                            <Popover.Body>
-                                                <ul>
-                                                    <li>c:\adipisicing.txt</li>
-                                                    <li>c:\ommod_luctus\nisiet\portor\ligu.txt</li>
-                                                    <li>c:\eget\lacinia_odio_sem.txt </li>
-                                                </ul>
-                                            </Popover.Body>
-                                        </Popover>
-                                    </div>
+                                <div className={styles['popover-example-rwd']}>
+                                    <Popover
+                                        show={true}
+                                        placement="top"
+                                        popoverHeader={<span>File Path (3)</span>}
+                                        popoverBody={
+                                            <ul>
+                                                <li>c:\adipisicing.txt</li>
+                                                <li>c:\ommod_luctus\nisiet\portor\ligu.txt</li>
+                                                <li>c:\eget\lacinia_odio_sem.txt </li>
+                                            </ul>
+                                        }
+                                    >
+                                        <span style={{ position: 'absolute', bottom: 0, right: '50%' }}><i className="fa fa-info-circle" /></span>
+                                    </Popover>
                                 </div>
                             </Section>
                         </div>
@@ -290,58 +287,41 @@ class App extends React.Component {
                             <Section className="row-md-6">
                                 <h2>Popovers with Control Elements</h2>
                                 <p>Popover can contain other control elements such as links and buttons. Click icon below to get an example.</p>
-                                <div>
-                                    { /* <!-- popover bottom --> */ }
-                                    <form>
-                                        <span
-                                            ref={node => {
-                                                this.popoverTarget = node;
-                                            }}
-                                            className={classNames(
-                                                styles.icon,
-                                                styles['icon-info-sign']
-                                            )}
-                                            onClick={() => {
-                                                this.actions.togglePopover('popover-example-ctrl', {
-                                                    target: this.popoverTarget,
-                                                    placement: 'bottom-right'
-                                                });
-                                            }}
-                                        />
-                                    </form>
-                                    {this.state.popover.name && this.state.popover.name === 'popover-example-ctrl' &&
-                                    <Popover
-                                        target={this.state.popover.params.target}
-                                        placement={this.state.popover.params.placement}
-                                        show={this.state.popover.params.show}
-                                        className={styles['popover-example']}
-                                    >
-                                        <Popover.Header>Title</Popover.Header>
-                                        <Popover.Body>
-                                            <div>
-                                                <div className="form-group">
-                                                    <label htmlFor="">IP address:</label>
-                                                    <input className="form-control" type="text" defaultValue="" />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label htmlFor="">Host name:</label>
-                                                    <input className="form-control" type="text" defaultValue="" />
-                                                </div>
-                                            </div>
-                                        </Popover.Body>
-                                        <Popover.Footer>
-                                            <Button
-                                                btnStyle="primary"
-                                                onClick={() => {
-                                                    this.actions.closePopover();
-                                                }}
-                                            >
-                                                Apply
-                                            </Button>
-                                        </Popover.Footer>
-                                    </Popover>
+                                <Popover
+                                    placement="bottom"
+                                    popoverHeader={
+                                        <span>Title</span>
                                     }
-                                </div>
+                                    popoverBody={
+                                        <div>
+                                            <div className="form-group">
+                                                <label htmlFor="">IP address:</label>
+                                                <input className="form-control" type="text" defaultValue="" />
+                                            </div>
+                                            <div className="form-group">
+                                                <label htmlFor="">Host name:</label>
+                                                <input className="form-control" type="text" defaultValue="" />
+                                            </div>
+                                        </div>
+                                    }
+                                    popoverFooter={
+                                        <Button
+                                            btnStyle="primary"
+                                            onClick={() => {
+                                                this.actions.closePopover();
+                                            }}
+                                        >
+                                            Apply
+                                        </Button>
+                                    }
+                                >
+                                    <span
+                                        className={classNames(
+                                            styles.icon,
+                                            styles['icon-info-sign']
+                                        )}
+                                    />
+                                </Popover>
                             </Section>
                         </div>
                     </div>
