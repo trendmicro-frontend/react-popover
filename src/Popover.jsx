@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import Align from 'rc-align';
+// import { placements } from './placements';
 import PopoverArrow from './PopoverArrow';
 import styles from './index.styl';
 
@@ -212,38 +214,56 @@ class Popover extends PureComponent {
         const {
             className,
             children,
+            target,
             ...props
         } = this.props;
-        const { isShow, place, offset } = this.state;
+        const { isShow, place } = this.state;
 
         // Remove props do not need to set into div
-        delete props.target;
+        // delete props.target;
         delete props.show;
         delete props.spacing;
         delete props.positionTop;
         delete props.positionLeft;
         delete props.placement;
 
+        if (!target) {
+            return (
+                <div
+                    {...props}
+                    className={classNames(
+                        className,
+                        styles.popover,
+                        { [styles.show]: isShow },
+                        styles[place] || ''
+                    )}
+                >
+                    <PopoverArrow className={styles[place]} />
+                    {children}
+                </div>
+            );
+        }
+
         return (
-            <div
-                {...props}
-                ref={node => {
-                    this.popover = node;
+            <Align
+                align={{
+                    points: ['cc', 'cc']
                 }}
-                style={{
-                    top: offset.top,
-                    left: offset.left
-                }}
-                className={classNames(
-                    className,
-                    styles.popover,
-                    { [styles.show]: isShow },
-                    styles[place] || ''
-                )}
+                target={() => target}
             >
-                <PopoverArrow className={styles[place]} />
-                {children}
-            </div>
+                <div
+                    {...props}
+                    className={classNames(
+                        className,
+                        styles.popover,
+                        { [styles.show]: isShow },
+                        styles[place] || ''
+                    )}
+                >
+                    <PopoverArrow className={styles[place]} />
+                    {children}
+                </div>
+            </Align>
         );
     }
 }
