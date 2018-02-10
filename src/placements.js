@@ -1,81 +1,81 @@
 const autoAdjustOverflow = {
-    adjustX: 1,
-    adjustY: 1
+    adjustX: true,
+    adjustY: true
 };
 
 const targetOffset = [0, 0];
 
-export const placements = {
+const placements = {
     'top': {
         points: ['bc', 'tc'],
+        offset: [0, -12],
         overflow: autoAdjustOverflow,
-        offset: [0, -8],
+        targetOffset
+    },
+    'top-left': {
+        points: ['br', 'tc'],
+        offset: [25, -12],
+        overflow: autoAdjustOverflow,
         targetOffset
     },
     'top-right': {
-        points: ['bl', 'tr'],
+        points: ['bl', 'tc'],
+        offset: [-25, -12],
         overflow: autoAdjustOverflow,
-        offset: [-32, -8],
-        targetOffset
-    },
-    'right-top': {
-        points: ['bl', 'tr'],
-        overflow: autoAdjustOverflow,
-        offset: [12, 32],
         targetOffset
     },
     'right': {
         points: ['cl', 'cr'],
-        overflow: autoAdjustOverflow,
         offset: [12, 0],
+        overflow: autoAdjustOverflow,
+        targetOffset
+    },
+    'right-top': {
+        points: ['bl', 'cr'],
+        offset: [12, 25],
+        overflow: autoAdjustOverflow,
         targetOffset
     },
     'right-bottom': {
-        points: ['tl', 'br'],
+        points: ['tl', 'cr'],
+        offset: [12, -25],
         overflow: autoAdjustOverflow,
-        offset: [12, -40],
-        targetOffset
-    },
-    'bottom-right': {
-        points: ['tl', 'br'],
-        overflow: autoAdjustOverflow,
-        offset: [-32, 8],
         targetOffset
     },
     'bottom': {
         points: ['tc', 'bc'],
+        offset: [0, 12],
         overflow: autoAdjustOverflow,
-        offset: [0, 8],
         targetOffset
     },
     'bottom-left': {
-        points: ['tr', 'bl'],
+        points: ['tr', 'bc'],
+        offset: [25, 12],
         overflow: autoAdjustOverflow,
-        offset: [32, 8],
         targetOffset
     },
-    'left-bottom': {
-        points: ['tr', 'bl'],
+    'bottom-right': {
+        points: ['tl', 'bc'],
+        offset: [-25, 12],
         overflow: autoAdjustOverflow,
-        offset: [-12, -40],
         targetOffset
     },
     'left': {
         points: ['cr', 'cl'],
-        overflow: autoAdjustOverflow,
         offset: [-12, 0],
+        overflow: autoAdjustOverflow,
         targetOffset
     },
     'left-top': {
-        points: ['br', 'tl'],
+        points: ['br', 'cl'],
+        offset: [-12, 25],
         overflow: autoAdjustOverflow,
-        offset: [-12, 32],
         targetOffset
     },
-    'top-left': {
-        points: ['br', 'tl'],
+    'left-bottom': {
+        points: ['tr', 'cl'],
+        offset: [-12, -25],
         overflow: autoAdjustOverflow,
-        offset: [32, -8],
         targetOffset
     }
 };

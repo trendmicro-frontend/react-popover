@@ -1,3 +1,4 @@
+
 # react-popover [![build status](https://travis-ci.org/trendmicro-frontend/react-popover.svg?branch=master)](https://travis-ci.org/trendmicro-frontend/react-popover) [![Coverage Status](https://coveralls.io/repos/github/trendmicro-frontend/react-popover/badge.svg?branch=master)](https://coveralls.io/github/trendmicro-frontend/react-popover?branch=master)
 
 [![NPM](https://nodei.co/npm/@trendmicro/react-popover.png?downloads=true&stars=true)](https://nodei.co/npm/@trendmicro/react-popover/)
@@ -56,17 +57,6 @@ Demo: https://trendmicro-frontend.github.io/react-popover
 >
     <Popover.Body>
         <span>Popover Top-left</span>
-    </Popover.Body>
-</Popover>
-
-// Set location
-<Popover
-    show={true}
-    positionTop={50}
-    positionLeft={50}
->
-    <Popover.Body>
-        <span>Popover Top</span>
     </Popover.Body>
 </Popover>
 
@@ -129,24 +119,6 @@ Demo: https://trendmicro-frontend.github.io/react-popover
             <td>Object</td>
             <td>null</td>
             <td>Target element to aligned</td>
-        </tr>
-        <tr>
-            <td>spacing</td>
-            <td>Number</td>
-            <td>0</td>
-            <td>The spacing (px) between target and arrow</td>
-        </tr>
-        <tr>
-            <td>positionTop</td>
-            <td>Number</td>
-            <td>0</td>
-            <td>The "top" position value (px) for the Popover. If propertie target is given, it will be the initial value only.</td>
-        </tr>
-        <tr>
-            <td>positionLeft</td>
-            <td>Number</td>
-            <td>0</td>
-            <td>The "left" position value (px) for the Popover. If propertie target is given, it will be the initial value only.</td>
         </tr>
   </tbody>
 </table>

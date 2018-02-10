@@ -23752,8 +23752,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _class, _temp;
-// import { placements } from './placements';
-
 
 var _propTypes = __webpack_require__("../node_modules/prop-types/index.js");
 
@@ -23763,6 +23761,8 @@ var _react = __webpack_require__("../node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = __webpack_require__("../node_modules/react-dom/index.js");
+
 var _classnames = __webpack_require__("../node_modules/classnames/index.js");
 
 var _classnames2 = _interopRequireDefault(_classnames);
@@ -23770,6 +23770,10 @@ var _classnames2 = _interopRequireDefault(_classnames);
 var _rcAlign = __webpack_require__("../node_modules/rc-align/es/index.js");
 
 var _rcAlign2 = _interopRequireDefault(_rcAlign);
+
+var _placements = __webpack_require__("../src/placements.js");
+
+var _placements2 = _interopRequireDefault(_placements);
 
 var _PopoverArrow = __webpack_require__("../src/PopoverArrow.jsx");
 
@@ -23791,9 +23795,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var arrowWidth = 18;
-var arrowShift = 16;
-
 var Popover = (_temp = _class = function (_PureComponent) {
     _inherits(Popover, _PureComponent);
 
@@ -23803,269 +23804,126 @@ var Popover = (_temp = _class = function (_PureComponent) {
         var _this = _possibleConstructorReturn(this, (Popover.__proto__ || Object.getPrototypeOf(Popover)).call(this, props));
 
         _this.actions = {
-            toggle: function toggle() {
-                var toState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+            getTarget: function getTarget() {
+                var target = _this.props.target;
 
-                _this.setState(function (prevState, props) {
-                    return _extends({}, prevState, {
-                        isShow: toState === null ? !prevState.isShow : !!toState
-                    });
+                return (0, _reactDom.findDOMNode)(target);
+            },
+            getAlign: function getAlign() {
+                var placement = _this.props.placement;
+
+                var align = _placements2.default[placement];
+                // console.log('getPopupAlign', align, placement); // debug
+                return align;
+            },
+            getPlacementFromAlign: function getPlacementFromAlign(align) {
+                var jsonAlign = JSON.stringify({
+                    // offset: align.offset,
+                    points: align.points
                 });
-            },
-            adjustPlace: function adjustPlace() {
-                var _this$state = _this.state,
-                    place = _this$state.place,
-                    offset = _this$state.offset;
-                var _this$props = _this.props,
-                    target = _this$props.target,
-                    newPlace = _this$props.placement,
-                    spacing = _this$props.spacing,
-                    positionTop = _this$props.positionTop,
-                    positionLeft = _this$props.positionLeft;
-
-                var popover = _this.popover;
-
-                if (!target) {
-                    return false;
-                }
-
-                var newOffset = {
-                    top: positionTop,
-                    left: positionLeft
-                };
-
-                if (newPlace === 'top') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth / 2 - popover.offsetWidth / 2)
-                    };
-                }
-
-                if (newPlace === 'top-left') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth / 2 - popover.offsetWidth + arrowShift + arrowWidth / 2)
-                    };
-                }
-
-                if (newPlace === 'top-right') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth / 2 - arrowShift - arrowWidth / 2)
-                    };
-                }
-
-                if (newPlace === 'right') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight / 2 - popover.offsetHeight / 2),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                    };
-                }
-
-                if (newPlace === 'right-top') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight / 2 - popover.offsetHeight + arrowShift + arrowWidth / 2),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                    };
-                }
-
-                if (newPlace === 'right-bottom') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight / 2 - arrowShift - arrowWidth / 2),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                    };
-                }
-
-                if (newPlace === 'bottom') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth / 2 - popover.offsetWidth / 2)
-                    };
-                }
-
-                if (newPlace === 'bottom-left') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth / 2 - popover.offsetWidth + arrowShift + arrowWidth / 2)
-                    };
-                }
-
-                if (newPlace === 'bottom-right') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                        left: Math.floor(target.offsetLeft + target.offsetWidth / 2 - arrowShift - arrowWidth / 2)
-                    };
-                }
-
-                if (newPlace === 'left') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight / 2 - popover.offsetHeight / 2),
-                        left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                    };
-                }
-
-                if (newPlace === 'left-top') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight / 2 - popover.offsetHeight + arrowShift + arrowWidth / 2),
-                        left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                    };
-                }
-
-                if (newPlace === 'left-bottom') {
-                    newOffset = {
-                        top: Math.floor(target.offsetTop + target.offsetHeight / 2 - arrowShift - arrowWidth / 2),
-                        left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                    };
-                }
-
-                // this.actions.isElementInView(popover, true)
-                if (place !== newPlace || offset.top !== newOffset.top || offset.left !== newOffset.left) {
-                    _this.setState(function (prevState, props) {
-                        return _extends({}, prevState, {
-                            place: newPlace,
-                            offset: newOffset
+                for (var placement in _placements2.default) {
+                    if (Object.prototype.hasOwnProperty.call(_placements2.default, placement)) {
+                        var buildAlign = _placements2.default[placement];
+                        var jsonPlacement = JSON.stringify({
+                            // offset: buildAlign.offset,
+                            points: buildAlign.points
                         });
-                    });
 
-                    return true;
+                        // http://www.mattzeunert.com/2016/01/28/javascript-deep-equal.html
+                        if (jsonPlacement === jsonAlign) {
+                            return placement;
+                        }
+                    }
                 }
 
-                return false;
+                // Should not happened
+                return _this.state.placement;
             },
-            // https://stackoverflow.com/questions/487073/check-if-element-is-visible-after-scrolling
-            isElementInView: function isElementInView(element, fullyInView) {
-                var pageTop = document.body.scrollTop;
-                var pageBottom = pageTop + document.body.offsetHeight;
-                var elementTop = element.offsetTop;
-                var elementBottom = elementTop + element.offsetHeight;
+            onAlign: function onAlign(source, align) {
+                var placement = _this.actions.getPlacementFromAlign(align);
+                // console.log('onAlign', align, placement); // debug
 
-                if (fullyInView === true) {
-                    return pageTop < elementTop && pageBottom > elementBottom;
-                } else {
-                    return elementTop <= pageBottom && elementBottom >= pageTop;
+                // update className
+                _this.setState(function (prevState, props) {
+                    if (placement !== prevState.placement) {
+                        return {
+                            placement: placement
+                        };
+                    }
+
+                    return {};
+                });
+
+                if (_this.props.onAlign) {
+                    _this.props.onAlign(source, align, placement);
                 }
             }
         };
 
 
         _this.state = {
-            target: props.target,
-            isShow: !!props.show,
-            place: props.placement,
-            offset: {
-                top: props.positionTop,
-                left: props.positionLeft
-            }
+            placement: props.placement
         };
         return _this;
     }
 
     _createClass(Popover, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.actions.toggle(nextProps.show);
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.actions.adjustPlace();
-        }
-    }, {
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate(prevProps, prevState) {
-            this.actions.adjustPlace();
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _props = this.props,
                 className = _props.className,
                 children = _props.children,
-                props = _objectWithoutProperties(_props, ['className', 'children']);
+                target = _props.target,
+                show = _props.show,
+                props = _objectWithoutProperties(_props, ['className', 'children', 'target', 'show']);
 
-            var _state = this.state,
-                isShow = _state.isShow,
-                place = _state.place;
+            var placement = this.state.placement;
 
             // Remove props do not need to set into div
 
-            delete props.target;
-            delete props.show;
-            delete props.spacing;
-            delete props.positionTop;
-            delete props.positionLeft;
             delete props.placement;
 
+            if (!target) {
+                return _react2.default.createElement(
+                    'div',
+                    _extends({}, props, {
+                        className: (0, _classnames2.default)(className, _index2.default.popover, _defineProperty({}, _index2.default.show, show), _index2.default[placement] || '')
+                    }),
+                    _react2.default.createElement(_PopoverArrow2.default, { className: _index2.default[placement] }),
+                    children
+                );
+            }
+
+            var align = this.actions.getAlign();
             return _react2.default.createElement(
                 _rcAlign2.default,
                 {
-                    align: {
-                        points: ['cc', 'cc']
-                    }
+                    align: align,
+                    target: this.actions.getTarget,
+                    onAlign: this.actions.onAlign,
+                    monitorWindowResize: true
                 },
                 _react2.default.createElement(
                     'div',
                     _extends({}, props, {
-                        className: (0, _classnames2.default)(className, _index2.default.popover, _defineProperty({}, _index2.default.show, isShow), _index2.default[place] || '')
+                        className: (0, _classnames2.default)(className, _index2.default.popover, _defineProperty({}, _index2.default.show, show), _index2.default[placement] || '')
                     }),
-                    _react2.default.createElement(_PopoverArrow2.default, { className: _index2.default[place] }),
+                    _react2.default.createElement(_PopoverArrow2.default, { className: _index2.default[placement] }),
                     children
                 )
             );
-            /*
-            const {
-                className,
-                children,
-                ...props
-            } = this.props;
-            const { isShow, place, offset } = this.state;
-             // Remove props do not need to set into div
-            delete props.target;
-            delete props.show;
-            delete props.spacing;
-            delete props.positionTop;
-            delete props.positionLeft;
-            delete props.placement;
-             return (
-                <div
-                    {...props}
-                    ref={node => {
-                        this.popover = node;
-                    }}
-                    style={{
-                        top: offset.top,
-                        left: offset.left
-                    }}
-                    className={classNames(
-                        className,
-                        styles.popover,
-                        { [styles.show]: isShow },
-                        styles[place] || ''
-                    )}
-                >
-                    <PopoverArrow className={styles[place]} />
-                    {children}
-                </div>
-            );
-            */
         }
     }]);
 
     return Popover;
 }(_react.PureComponent), _class.propTypes = {
     target: _propTypes2.default.object,
-    // Specify whether to show the popover.
-    show: _propTypes2.default.bool,
-    spacing: _propTypes2.default.number, // The spacing between target and arrow
-    positionTop: _propTypes2.default.number,
-    positionLeft: _propTypes2.default.number,
-    placement: _propTypes2.default.oneOf(['top', 'top-left', 'top-right', 'right', 'right-top', 'right-bottom', 'bottom', 'bottom-left', 'bottom-right', 'left', 'left-top', 'left-bottom'])
+    show: _propTypes2.default.bool, // Specify whether to show the popover.
+    placement: _propTypes2.default.oneOf(['top', 'top-left', 'top-right', 'right', 'right-top', 'right-bottom', 'bottom', 'bottom-left', 'bottom-right', 'left', 'left-top', 'left-bottom']),
+    onAlign: _propTypes2.default.func
 }, _class.defaultProps = {
     target: null,
     show: false,
-    spacing: 0, // in px
-    positionTop: 0,
-    positionLeft: 0,
     placement: 'top'
 }, _temp);
 exports.default = Popover;
@@ -24408,6 +24266,101 @@ if(false) {
 
 /***/ }),
 
+/***/ "../src/placements.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var autoAdjustOverflow = {
+    adjustX: true,
+    adjustY: true
+};
+
+var targetOffset = [0, 0];
+
+var placements = {
+    'top': {
+        points: ['bc', 'tc'],
+        offset: [0, -12],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'top-left': {
+        points: ['br', 'tc'],
+        offset: [25, -12],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'top-right': {
+        points: ['bl', 'tc'],
+        offset: [-25, -12],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'right': {
+        points: ['cl', 'cr'],
+        offset: [12, 0],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'right-top': {
+        points: ['bl', 'cr'],
+        offset: [12, 25],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'right-bottom': {
+        points: ['tl', 'cr'],
+        offset: [12, -25],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'bottom': {
+        points: ['tc', 'bc'],
+        offset: [0, 12],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'bottom-left': {
+        points: ['tr', 'bc'],
+        offset: [25, 12],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'bottom-right': {
+        points: ['tl', 'bc'],
+        offset: [-25, 12],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'left': {
+        points: ['cr', 'cl'],
+        offset: [-12, 0],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'left-top': {
+        points: ['br', 'cl'],
+        offset: [-12, 25],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    },
+    'left-bottom': {
+        points: ['tr', 'cl'],
+        offset: [-12, -25],
+        overflow: autoAdjustOverflow,
+        targetOffset: targetOffset
+    }
+};
+
+exports.default = placements;
+
+/***/ }),
+
 /***/ "./Navbar.jsx":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24708,7 +24661,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint jsx-a11y/no-static-element-interactions: 0 */
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
@@ -25246,6 +25199,8 @@ var App = function (_React$Component) {
                                         'form',
                                         null,
                                         _react2.default.createElement('span', {
+                                            tabIndex: -1,
+                                            role: 'button',
                                             ref: function ref(node) {
                                                 _this2.popoverTarget = node;
                                             },
@@ -25363,4 +25318,4 @@ if(false) {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map?575ed1c0f6b1e6e2a220
+//# sourceMappingURL=bundle.js.map?1a33c694df35eca1edd4
