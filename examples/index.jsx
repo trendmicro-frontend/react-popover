@@ -294,6 +294,8 @@ class App extends React.Component {
                                     { /* <!-- popover bottom --> */ }
                                     <form>
                                         <span
+                                            tabIndex={-1}
+                                            role="button"
                                             ref={node => {
                                                 this.popoverTarget = node;
                                             }}

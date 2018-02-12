@@ -1,20 +1,16 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
+import Align from 'rc-align';
+import placements from './placements';
 import PopoverArrow from './PopoverArrow';
 import styles from './index.styl';
-
-const arrowWidth = 18;
-const arrowShift = 16;
 
 class Popover extends PureComponent {
     static propTypes = {
         target: PropTypes.object,
-        // Specify whether to show the popover.
-        show: PropTypes.bool,
-        spacing: PropTypes.number, // The spacing between target and arrow
-        positionTop: PropTypes.number,
-        positionLeft: PropTypes.number,
+        show: PropTypes.bool, // Specify whether to show the popover.
         placement: PropTypes.oneOf([
             'top',
             'top-left',
@@ -28,14 +24,12 @@ class Popover extends PureComponent {
             'left',
             'left-top',
             'left-bottom'
-        ])
+        ]),
+        onAlign: PropTypes.func
     };
     static defaultProps = {
         target: null,
         show: false,
-        spacing: 0, // in px
-        positionTop: 0,
-        positionLeft: 0,
         placement: 'top'
     };
 
@@ -43,167 +37,61 @@ class Popover extends PureComponent {
         super(props);
 
         this.state = {
-            target: props.target,
-            isShow: !!props.show,
-            place: props.placement,
-            offset: {
-                top: props.positionTop,
-                left: props.positionLeft
-            }
+            placement: props.placement
         };
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.actions.toggle(nextProps.show);
-    }
-
-    componentDidMount() {
-        this.actions.adjustPlace();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        this.actions.adjustPlace();
-    }
-
     actions = {
-        toggle: (toState = null) => {
-            this.setState((prevState, props) => {
-                return {
-                    ...prevState,
-                    isShow: (toState === null) ? !prevState.isShow : !!toState
-                };
+        getTarget: () => {
+            const { target } = this.props;
+            return findDOMNode(target);
+        },
+        getAlign: () => {
+            const { placement } = this.props;
+            const align = placements[placement];
+            // console.log('getPopupAlign', align, placement); // debug
+            return align;
+        },
+        getPlacementFromAlign: (align) => {
+            const jsonAlign = JSON.stringify({
+                // offset: align.offset,
+                points: align.points
             });
+            for (const placement in placements) {
+                if (Object.prototype.hasOwnProperty.call(placements, placement)) {
+                    const buildAlign = placements[placement];
+                    const jsonPlacement = JSON.stringify({
+                        // offset: buildAlign.offset,
+                        points: buildAlign.points
+                    });
+
+                    // http://www.mattzeunert.com/2016/01/28/javascript-deep-equal.html
+                    if (jsonPlacement === jsonAlign) {
+                        return placement;
+                    }
+                }
+            }
+
+            // Should not happened
+            return this.state.placement;
         },
-        adjustPlace: () => {
-            const { place, offset } = this.state;
-            const {
-                target,
-                placement: newPlace,
-                spacing,
-                positionTop,
-                positionLeft
-            } = this.props;
-            const popover = this.popover;
+        onAlign: (source, align) => {
+            const placement = this.actions.getPlacementFromAlign(align);
+            // console.log('onAlign', align, placement); // debug
 
-            if (!target) {
-                return false;
-            }
-
-            let newOffset = {
-                top: positionTop,
-                left: positionLeft
-            };
-
-            if (newPlace === 'top') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - (popover.offsetWidth / 2))
-                };
-            }
-
-            if (newPlace === 'top-left') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - popover.offsetWidth + arrowShift + (arrowWidth / 2))
-                };
-            }
-
-            if (newPlace === 'top-right') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop - popover.offsetHeight - spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - arrowShift - (arrowWidth / 2))
-                };
-            }
-
-            if (newPlace === 'right') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - (popover.offsetHeight / 2)),
-                    left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                };
-            }
-
-            if (newPlace === 'right-top') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - popover.offsetHeight + arrowShift + (arrowWidth / 2)),
-                    left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                };
-            }
-
-            if (newPlace === 'right-bottom') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - arrowShift - (arrowWidth / 2)),
-                    left: Math.floor(target.offsetLeft + target.offsetWidth + spacing)
-                };
-            }
-
-            if (newPlace === 'bottom') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - (popover.offsetWidth / 2))
-                };
-            }
-
-            if (newPlace === 'bottom-left') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - popover.offsetWidth + arrowShift + (arrowWidth / 2))
-                };
-            }
-
-            if (newPlace === 'bottom-right') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + target.offsetHeight + spacing),
-                    left: Math.floor(target.offsetLeft + (target.offsetWidth / 2) - arrowShift - (arrowWidth / 2))
-                };
-            }
-
-            if (newPlace === 'left') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - (popover.offsetHeight / 2)),
-                    left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                };
-            }
-
-            if (newPlace === 'left-top') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - popover.offsetHeight + arrowShift + (arrowWidth / 2)),
-                    left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                };
-            }
-
-            if (newPlace === 'left-bottom') {
-                newOffset = {
-                    top: Math.floor(target.offsetTop + (target.offsetHeight / 2) - arrowShift - (arrowWidth / 2)),
-                    left: Math.floor(target.offsetLeft - popover.offsetWidth - spacing)
-                };
-            }
-
-            // this.actions.isElementInView(popover, true)
-            if (place !== newPlace || offset.top !== newOffset.top || offset.left !== newOffset.left) {
-                this.setState((prevState, props) => {
+            // update className
+            this.setState((prevState, props) => {
+                if (placement !== prevState.placement) {
                     return {
-                        ...prevState,
-                        place: newPlace,
-                        offset: newOffset
+                        placement: placement
                     };
-                });
+                }
 
-                return true;
-            }
+                return {};
+            });
 
-            return false;
-        },
-        // https://stackoverflow.com/questions/487073/check-if-element-is-visible-after-scrolling
-        isElementInView: (element, fullyInView) => {
-            const pageTop = document.body.scrollTop;
-            const pageBottom = pageTop + document.body.offsetHeight;
-            const elementTop = element.offsetTop;
-            const elementBottom = elementTop + element.offsetHeight;
-
-            if (fullyInView === true) {
-                return ((pageTop < elementTop) && (pageBottom > elementBottom));
-            } else {
-                return ((elementTop <= pageBottom) && (elementBottom >= pageTop));
+            if (this.props.onAlign) {
+                this.props.onAlign(source, align, placement);
             }
         }
     };
@@ -212,38 +100,53 @@ class Popover extends PureComponent {
         const {
             className,
             children,
+            target,
+            show,
             ...props
         } = this.props;
-        const { isShow, place, offset } = this.state;
+        const { placement } = this.state;
 
         // Remove props do not need to set into div
-        delete props.target;
-        delete props.show;
-        delete props.spacing;
-        delete props.positionTop;
-        delete props.positionLeft;
         delete props.placement;
 
+        if (!target) {
+            return (
+                <div
+                    {...props}
+                    className={classNames(
+                        className,
+                        styles.popover,
+                        { [styles.show]: show },
+                        styles[placement] || ''
+                    )}
+                >
+                    <PopoverArrow className={styles[placement]} />
+                    {children}
+                </div>
+            );
+        }
+
+        const align = this.actions.getAlign();
         return (
-            <div
-                {...props}
-                ref={node => {
-                    this.popover = node;
-                }}
-                style={{
-                    top: offset.top,
-                    left: offset.left
-                }}
-                className={classNames(
-                    className,
-                    styles.popover,
-                    { [styles.show]: isShow },
-                    styles[place] || ''
-                )}
+            <Align
+                align={align}
+                target={this.actions.getTarget}
+                onAlign={this.actions.onAlign}
+                monitorWindowResize={true}
             >
-                <PopoverArrow className={styles[place]} />
-                {children}
-            </div>
+                <div
+                    {...props}
+                    className={classNames(
+                        className,
+                        styles.popover,
+                        { [styles.show]: show },
+                        styles[placement] || ''
+                    )}
+                >
+                    <PopoverArrow className={styles[placement]} />
+                    {children}
+                </div>
+            </Align>
         );
     }
 }
