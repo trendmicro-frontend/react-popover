@@ -1,13 +1,6 @@
 {
   "name": "@trendmicro/react-popover",
   "description": "React Popover",
-  "authors": [
-    {
-      "name": "Mark Lin",
-      "email": "mark_lin@trend.com.tw",
-      "homepage": "https://github.com/trendmicro-frontend"
-    }
-  ],
   "homepage": "https://github.com/trendmicro-frontend/react-popover",
   "snapshots": [],
   "keywords": [
